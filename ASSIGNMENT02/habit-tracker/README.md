@@ -21,7 +21,7 @@ This app includes an additional feature to meet assignment expectations:
 
 Live Demo
 
-Live Site: 
+Live Site: https://habit-tracker-app-2pvm.onrender.com/
 
 ---
 
