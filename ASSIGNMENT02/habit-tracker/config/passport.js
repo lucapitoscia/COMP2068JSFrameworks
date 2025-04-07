@@ -5,8 +5,9 @@ const bcrypt = require('bcryptjs');
 
 const User = require('../models/User');
 
-module.exports = function(passport) {
-  
+module.exports = function (passport) {
+
+  // Local Strategy
   passport.use(
     new LocalStrategy(async (username, password, done) => {
       try {
@@ -24,32 +25,33 @@ module.exports = function(passport) {
     })
   );
 
-
+  // GitHub Strategy (force HTTPS for Render)
   passport.use(
     new GitHubStrategy({
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: '/auth/github/callback'
+      callbackURL: 'https://habit-tracker-app-2pvm.onrender.com/auth/github/callback' // ✅ Fully qualified HTTPS URL
     },
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        let user = await User.findOne({ githubId: profile.id });
+      async (accessToken, refreshToken, profile, done) => {
+        try {
+          let user = await User.findOne({ githubId: profile.id });
 
-        if (!user) {
-          user = await User.create({
-            username: profile.username,
-            githubId: profile.id
-          });
+          if (!user) {
+            user = await User.create({
+              username: profile.username,
+              githubId: profile.id
+            });
+          }
+
+          return done(null, user);
+        } catch (err) {
+          return done(err, null);
         }
-
-        return done(null, user);
-      } catch (err) {
-        return done(err, null);
       }
-    })
+    )
   );
 
- 
+  // Sessions
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });
