@@ -1,0 +1,43 @@
+{{> header}}
+
+<h1>Progress for "{{habit.name}}"</h1>
+
+<canvas id="progressChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+
+<script>
+  const completedDates = {{{completedDatesJSON}}};
+
+  
+  const formattedDates = completedDates.map(date => moment(date).format('YYYY-MM-DD'));
+
+  const data = {
+    labels: formattedDates,
+    datasets: [{
+      label: 'Completed',
+      data: formattedDates.map(() => 1),
+      backgroundColor: 'rgba(54, 162, 235, 0.5)',
+      borderColor: 'rgba(54, 162, 235, 1)',
+      borderWidth: 1
+    }]
+  };
+
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        y: { beginAtZero: true, suggestedMax: 1 }
+      }
+    }
+  };
+
+  new Chart(document.getElementById('progressChart'), config);
+</script>
+
+<br>
+<a href="/habits">← Back to Habits</a>
+
+{{> footer}}

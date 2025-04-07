@@ -1,0 +1,55 @@
+{{> header}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Habits</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container mt-4">
+    <h1 class="mb-4 text-center">My Habits</h1>
+
+    <div class="text-center mb-4">
+      <a href="/habits/add" class="btn btn-success">➕ Add New Habit</a>
+    </div>
+
+    <ul class="list-group">
+      {{#each habits}}
+        <li class="list-group-item d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <div>
+            <strong>{{this.name}}</strong> - {{this.frequency}}
+          </div>
+
+          <div class="mt-2 mt-md-0">
+            <a href="/habits/edit/{{this._id}}" class="btn btn-warning btn-sm">✏️ Edit</a>
+
+            <form action="/habits/delete/{{this._id}}" method="POST" style="display:inline;">
+              <button class="btn btn-danger btn-sm" type="submit">🗑️ Delete</button>
+            </form>
+
+            <a href="/habits/progress/{{this._id}}" class="btn btn-primary btn-sm">📈 View Progress</a>
+
+            <form action="/habits/complete/{{this._id}}" method="POST" style="display:inline;">
+              <button class="btn btn-success btn-sm" type="submit">✅ Complete</button>
+            </form>
+          </div>
+        </li>
+      {{/each}}
+
+      {{#unless habits.length}}
+        <li class="list-group-item">No habits added yet!</li>
+      {{/unless}}
+    </ul>
+
+    <div class="text-center mt-4">
+      <a href="/" class="btn btn-outline-secondary">← Back to Home</a>
+    </div>
+  </div>
+
+</body>
+</html>
+
+{{> footer}}

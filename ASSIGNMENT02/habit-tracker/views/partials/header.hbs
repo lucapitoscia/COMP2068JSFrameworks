@@ -1,0 +1,15 @@
+<header style="background:#f4f4f4; padding: 20px;">
+  <h1><a href="/" style="text-decoration:none; color:black;">📘 Habit Tracker</a></h1>
+  <nav>
+    <a href="/habits">My Habits</a> |
+    <a href="/habits/public">Public</a> |
+    {{#if user}}
+      <span>Welcome, <strong>{{user.displayName}}{{user.username}}</strong></span> |
+      <a href="/auth/logout">Logout</a>
+    {{else}}
+      <a href="/auth/login">Login</a> |
+      <a href="/auth/register">Register</a>
+    {{/if}}
+  </nav>
+</header>
+<hr>

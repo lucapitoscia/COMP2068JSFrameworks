@@ -1,0 +1,20 @@
+{{> header}}
+
+<h1>Public Habits Directory</h1>
+
+<ul>
+  {{#each habits}}
+    <li>
+      <strong>{{this.name}}</strong> - {{this.frequency}}
+    </li>
+  {{/each}}
+
+  {{#unless habits.length}}
+    <li>No habits to display.</li>
+  {{/unless}}
+</ul>
+
+<br>
+<a href="/">← Back to Home</a>
+
+{{> footer}}

@@ -1,0 +1,21 @@
+{{> header}}
+
+<h1>Register</h1>
+
+{{#if error_msg}}
+  <div style="color: red;">{{error_msg}}</div>
+{{/if}}
+
+<form action="/auth/register" method="POST">
+  <label for="username">Username</label><br>
+  <input type="text" name="username" id="username" required><br><br>
+
+  <label for="password">Password</label><br>
+  <input type="password" name="password" id="password" required><br><br>
+
+  <button type="submit">Register</button>
+</form>
+
+<p>Already have an account? <a href="/auth/login">Login here</a></p>
+
+{{> footer}}

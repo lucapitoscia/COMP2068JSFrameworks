@@ -1,0 +1,22 @@
+{{> header}}
+
+<h1>Edit Habit</h1>
+
+<form action="/habits/edit/{{habit._id}}" method="POST">
+  <label for="name">Habit Name:</label><br>
+  <input type="text" id="name" name="name" value="{{habit.name}}" required><br><br>
+
+  <label for="frequency">Frequency:</label><br>
+  <select id="frequency" name="frequency" required>
+    <option value="Daily">Daily</option>
+    <option value="Weekly">Weekly</option>
+    <option value="Monthly">Monthly</option>
+  </select><br><br>
+
+  <button type="submit">Update Habit</button>
+</form>
+
+<br>
+<a href="/habits">← Back to Habit List</a>
+
+{{> footer}}
